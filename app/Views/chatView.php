@@ -5,18 +5,7 @@
   <title>MyWhistle Chat</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 <link rel="stylesheet" href="./message.css">
-
-
 </head>
-<body>
-<!-- partial:index.partial.html -->
-<head>
-  <meta charset="UTF-8">
-  <title>Chat</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-</head>
-
 <body>
 <div class="fabs">
   <div class="chat">
@@ -35,30 +24,43 @@
         <a id="chat_first_screen" class="fab"><i class="zmdi zmdi-arrow-right"></i></a>
         <p>We make it simple and seamless for you to talk to us. Tell us anything</p>
     </div>
-    <div id="chat_converse" class="chat_conversion chat_converse">
-    <?php foreach ($chats as $chat) { ?>
 
-<?php } ?>
+
+    <div id="chat_converse" class="chat_conversion chat_converse">
+    <span class="chat_msg_item chat_msg_item_admin">
+            <div class="chat_avatar">
+            
+            </div>Hey there! Any question?</span>
+      <span class="chat_msg_item chat_msg_item_user">
+            Hello!</span>
+            <span class="status">20m ago</span>
     </div>
+
+
       <div id="chat_fullscreen" class="chat_conversion chat_converse">
-   
     </div>
     <div class="fab_field">
 
 
 	<form action= "<?php echo base_url('Chat/save'); ?>" method= "post">
 
-	    <input type="hidden" id="sent_by" name = "sent_by" value = "user"/>
-      <button id="fab_send" class="fab"><i class="zmdi zmdi-mail-send" ></i></button>
+	    <input type="hidden" id="sent_by" name = "sent_by" value = "user"/></input>
+      <button type="submit" id="fab_send" class="fab"><i class="zmdi zmdi-mail-send" ></i></button>
       <input type="textarea" id="message" name="message" placeholder="Send a message" class="chat_field chat_message"></input>
-    </div>
   </form>
 
+
+  </div>
   </div>
     <a id="prime" class="fab"><i class="prime zmdi zmdi-comment-outline"></i></a>
 </div>
+<script src="js/index.js"></script>
   <script src='http://code.jquery.com/jquery-1.11.3.min.js'></script>
-
+  <script>
+$( "#fab_send" ).click(function() {
+   e.preventDefault();
+});
+</script>
 <script>
 hideChat(0);
 
