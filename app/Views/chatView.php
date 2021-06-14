@@ -16,7 +16,6 @@
         <img src="<?php echo base_url('images/favicon.png');?>"/>
         </div>
         <span id="chat_head">Administrator</span> <br> <span class="agent"></span> <span class="online">(Online)</span>
-       <span id="chat_fullscreen_loader" class="chat_fullscreen_loader"><i class="fullscreen zmdi zmdi-window-maximize"></i></span>
 
       </div>
 
@@ -52,7 +51,7 @@
     <div class="fab_field">
 
 
-	<form id="myform" method= "post">
+	<form id="myform" method= "post" >
 
 	    <input type="hidden" id="sent_by" name = "sent_by" value = "user"/></input>
       <button type="submit" id="fab_send" name="fab_send"class="fab" onclick="save()" ><i class="zmdi zmdi-mail-send" ></i></button>
@@ -166,6 +165,12 @@ function hideChat(hide) {
 </script>
 
 <script>
+  $(document).ready(function() {
+    $(document).on('fab_send', '#myform', function() {
+      // do your things
+      return false;
+     });
+});
    function save() {
                 var url;
                 url = "<?php echo base_url('Chat/save') ?>";
