@@ -51,7 +51,7 @@
     <div class="fab_field">
 
 
-	<form id="myform" method= "post" >
+	<form id="myform" method= "post">
 
 	    <input type="hidden" id="sent_by" name = "sent_by" value = "user"/></input>
       <button type="submit" id="fab_send" name="fab_send"class="fab" onclick="save()" ><i class="zmdi zmdi-mail-send" ></i></button>
@@ -165,12 +165,7 @@ function hideChat(hide) {
 </script>
 
 <script>
-  $(document).ready(function() {
-    $(document).on('fab_send', '#myform', function() {
-      // do your things
-      return false;
-     });
-});
+
    function save() {
                 var url;
                 url = "<?php echo base_url('Chat/save') ?>";
@@ -182,8 +177,8 @@ function hideChat(hide) {
                     data: $('#myform').serialize(),
                     dataType: "JSON",
                     success: function(data) {
-
-                        $("#chat_converse").load(location.href + " #chat_converse"); // reload employee table
+                   
+                        $("#chat_converse").load(location.href + " #chat_converse");
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         alert('Error adding / update data');
@@ -191,6 +186,10 @@ function hideChat(hide) {
                 });
             }
 </script>
+
+<script> 
+</script>
+
 </body>
 
 </html>
