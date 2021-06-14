@@ -400,10 +400,15 @@ ul li{
   z-index: 999;
 }
 .status {
-    margin: 45px -50px 0 0;
     float: right;
     font-size: 11px;
     opacity: 0.3;
+}
+
+.status3 {
+  float: left;
+  font-size: 11px;
+  opacity: 0.3;
 }
 .status2 {
     margin: -10px 20px 0 0;

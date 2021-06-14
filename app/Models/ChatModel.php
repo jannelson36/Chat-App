@@ -13,9 +13,11 @@ class ChatModel extends Model{
 
     
    
-    public function get_messages($limit = 50){
-        $sql = "SELECT * FROM chats ORDER BY id DESC LIMIT $limit";		
-		return $this->db->query($sql);
+    public function get_messages(){
+        $limit = 50;
+        $sql = "SELECT * FROM chats";
+        $query = $this->db->query($sql);		
+		return $query->getResult();
     }
  
    public function save_chat($data){

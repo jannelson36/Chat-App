@@ -18,6 +18,7 @@ class Chat extends BaseController
         helper(['form', 'url']);
 		$this->ChatModel = new ChatModel();
         $data['chats']=$this->ChatModel->get_messages();
+        
         return view('chatView', $data);
     }
  
