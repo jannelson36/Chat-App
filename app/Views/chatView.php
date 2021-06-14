@@ -52,10 +52,10 @@
     <div class="fab_field">
 
 
-	<form id="myform" action= "<?php echo base_url('Chat/save'); ?>" method= "post">
+	<form id="myform" method= "post">
 
 	    <input type="hidden" id="sent_by" name = "sent_by" value = "user"/></input>
-      <button type="submit" id="fab_send" name="fab_send"class="fab" ><i class="zmdi zmdi-mail-send" ></i></button>
+      <button type="submit" id="fab_send" name="fab_send"class="fab" onclick="save()" ><i class="zmdi zmdi-mail-send" ></i></button>
       <input type="textarea" id="message" name="message" placeholder="Send a message" class="chat_field chat_message"></input>
   </form>
 
@@ -166,68 +166,25 @@ function hideChat(hide) {
 </script>
 
 <script>
-$(document).ready(function(){
+   function save() {
+                var url;
+                url = "<?php echo base_url('Chat/save') ?>";
 
-var conn = new WebSocket('ws://127.0.0.1:8080');
-conn.onopen = function(e) {
-    console.log("Connection established!");
-};
-conn.onmessage = function(e) {
-		    console.log(e.data);
+                // ajax adding data to database
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: $('#myform').serialize(),
+                    dataType: "JSON",
+                    success: function(data) {
 
-		    var data = JSON.parse(e.data);
-
-		    var row_class = '';
-
-		    var background_class = '';
-
-		    if(data.from == 'Me')
-		    {
-		    	row_class = 'row justify-content-start';
-		    	background_class = 'text-dark alert-light';
-		    }
-		    else
-		    {
-		    	row_class = 'row justify-content-end';
-		    	background_class = 'alert-success';
-		    }
-
-		    var html_data = "<div class='"+row_class+"'><div class='col-sm-10'><div class='shadow-sm alert "+background_class+"'><b>"+data.sent_by+" - </b>"+data.message+"<br /><div class='text-right'><small><i>"+data.timestamp+"</i></small></div></div></div></div>";
-
-		    $('#chat_converse').append(html_data);
-
-		    $("#message").val("");
-		};
-
-		$('#myform').parsley();
-
-		$('#chat_converse').scrollTop($('#chat_converse')[0].scrollHeight);
-
-		$('#myform').on('fab_send', function(event){
-
-			event.preventDefault();
-
-			if($('#myform').parsley().isValid())
-			{
-
-				var sent_by = $('#sent_by').val();
-
-				var message = $('#message').val();
-
-				var data = {
-					sent_by : sent_by,
-					message : message
-				};
-
-				conn.send(JSON.stringify(data));
-
-				$('#chat_converse').scrollTop($('#chat_converse')[0].scrollHeight);
-
-			}
-
-		});
-  });
-
+                        $("#chat_converse").load(location.href + " #chat_converse"); // reload employee table
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        alert('Error adding / update data');
+                    }
+                });
+            }
 </script>
 </body>
 
