@@ -55,7 +55,7 @@
 
 	    <input type="hidden" id="sent_by" name = "sent_by" value = "user"/></input>
 
-      <button type="submit" id="fab_send" name="fab_send" class="fab" onclick="save()"   onclick="clearContent()"><i class="zmdi zmdi-mail-send" ></i></button>
+      <button type="submit" id="fab_send" name="fab_send" class="fab" onclick="save()"><i class="zmdi zmdi-mail-send" ></i></button>
       <input type="textarea" id="message" name="message" placeholder="Send a message" class="chat_field chat_message"></input>
   </form>
 
@@ -205,6 +205,10 @@ $(document).ready(function(){
 </script>
 
 <script>
+function myFunction() {
+    document.getElementById("message").style.visibility = "visible";
+    return false;
+}
 </script>
 
 
