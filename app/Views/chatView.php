@@ -194,7 +194,7 @@ $(document).ready(function(){
 
 
 				});	
-        $('#message').val('');					
+              $('#message').val('');					
               $('#message').focus();
 
         return false;
