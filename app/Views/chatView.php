@@ -54,7 +54,8 @@
 	<form id="myform" method= "post">
 
 	    <input type="hidden" id="sent_by" name = "sent_by" value = "user"/></input>
-      <button type="submit" id="fab_send" name="fab_send"class="fab" onclick="save()" ><i class="zmdi zmdi-mail-send" ></i></button>
+
+      <button type="submit" id="fab_send" name="fab_send" class="fab" onclick="save()"   onclick="clearContent()"><i class="zmdi zmdi-mail-send" ></i></button>
       <input type="textarea" id="message" name="message" placeholder="Send a message" class="chat_field chat_message"></input>
   </form>
 
@@ -164,31 +165,48 @@ function hideChat(hide) {
 
 </script>
 
+
 <script>
 
-   function save() {
+$(document).ready(function(){
+						
+			$("form#myform").submit(function(){
+       
+
                 var url;
                 url = "<?php echo base_url('Chat/save') ?>";
 
-                // ajax adding data to database
-                $.ajax({
-                    url: url,
-                    type: "POST",
-                    data: $('#myform').serialize(),
-                    dataType: "JSON",
-                    success: function(data) {
-                   
-                        $("#chat_converse").load(location.href + " #chat_converse");
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        alert('Error adding / update data');
-                    }
-                });
-            }
+											
+				$.ajax("/Chat/save",{
+              url: url,
+							message: $("#message").val(),
+							sent_by: $("#sent_by").val(),
+							type : "post",
+              dataType: "JSON",
+              data: $('#myform').serialize(), 
+
+						}, 
+            function(data) {
+					
+              $("#chat_converse").load(location.href + " #chat_converse");
+              $('#message').val('');					
+              $('#message').focus();
+
+
+				});	
+        $('#message').val('');					
+              $('#message').focus();
+
+        return false;
+			});
+
+		});
+    
 </script>
 
-<script> 
+<script>
 </script>
+
 
 </body>
 
