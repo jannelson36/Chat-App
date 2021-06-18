@@ -28,35 +28,34 @@
 
     <div id="chat_converse" class="chat_conversion chat_converse">
     
-    <?php foreach ($chats as $chat) { 
+<?php foreach ($chats as $chat) { 
       if($chat->sent_by == 'Admin'){ ?>
         <span class="chat_msg_item chat_msg_item_admin">
-        <span class="status3"><?php echo date("h:i",strtotime($chat->timestamp)); ?></span>
+        <span class="status3"><?php echo date("h:i a",strtotime($chat->timestamp)); ?></span>
        <br><?php echo $chat->message ?></span>
           
       <?php }
 
       else{?>
           <span class="chat_msg_item chat_msg_item_user">
-          <span class="status"><?php echo date("h:i",strtotime($chat->timestamp)); ?></span>
+          <span class="status"><?php echo date("h:i a",strtotime($chat->timestamp)); ?></span>
          <br> <?php echo $chat->message ?></span>
         
   
       <?php } ?>          
    <?php }?>
-
-    </div>
-      <div id="chat_fullscreen" class="chat_conversion chat_converse">
+    
     </div>
     <div class="fab_field">
 
+    
 
 	<form id="myform" method= "post">
 
 	    <input type="hidden" id="sent_by" name = "sent_by" value = "user"/></input>
 
-      <button type="submit" id="fab_send" name="fab_send" class="fab" onclick="save()"><i class="zmdi zmdi-mail-send" ></i></button>
-      <input type="textarea" id="message" name="message" placeholder="Send a message" class="chat_field chat_message"></input>
+      <button type="submit" id="fab_send" name="fab_send" class="fab" ><i class="zmdi zmdi-mail-send" ></i></button>
+      <input type="textarea" id="message" name="message" placeholder="Send a message" class="chat_field chat_message" ></input>
   </form>
 
 
@@ -187,10 +186,9 @@ $(document).ready(function(){
 
 						}, 
             function(data) {
-					
+              
               $("#chat_converse").load(location.href + " #chat_converse");
-              $('#message').val('');					
-              $('#message').focus();
+            
 
 
 				});	
@@ -201,14 +199,21 @@ $(document).ready(function(){
 			});
 
 		});
+
+
+    
     
 </script>
 
 <script>
-function myFunction() {
-    document.getElementById("message").style.visibility = "visible";
-    return false;
-}
+$(document).ready(function () {
+  setInterval(function() {
+    var $message = $("#chat_converse");
+        $message[0].scrollTop = $message[0].scrollHeight;
+        $("#chat_converse").load(location.href + " #chat_converse");
+}, 1500);
+
+});
 </script>
 
 
