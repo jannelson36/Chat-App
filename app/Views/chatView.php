@@ -30,14 +30,14 @@
     
 <?php foreach ($chats as $chat) { 
       if($chat->sent_by == 'Admin'){ ?>
-        <span class="chat_msg_item chat_msg_item_admin">
+        <span id="chat_msg_item_admin" class="chat_msg_item chat_msg_item_admin">
         <span class="status3"><?php echo date("h:i a",strtotime($chat->timestamp)); ?></span>
        <br><?php echo $chat->message ?></span>
           
       <?php }
 
       else{?>
-          <span class="chat_msg_item chat_msg_item_user">
+          <span id="chat_msg_item_user" class="chat_msg_item chat_msg_item_user">
           <span class="status"><?php echo date("h:i a",strtotime($chat->timestamp)); ?></span>
          <br> <?php echo $chat->message ?></span>
         
@@ -54,7 +54,7 @@
 
 	    <input type="hidden" id="sent_by" name = "sent_by" value = "user"/></input>
 
-      <button type="submit" id="fab_send" name="fab_send" class="fab" ><i class="zmdi zmdi-mail-send" ></i></button>
+      <button type="submit" id="fab_send" name="fab_send" class="fab"><i class="zmdi zmdi-mail-send" ></i></button>
       <input type="textarea" id="message" name="message" placeholder="Send a message" class="chat_field chat_message" ></input>
   </form>
 
@@ -171,7 +171,8 @@ $(document).ready(function(){
 						
 			$("form#myform").submit(function(){
        
-
+                
+             
                 var url;
                 url = "<?php echo base_url('Chat/save') ?>";
 
@@ -185,13 +186,7 @@ $(document).ready(function(){
               data: $('#myform').serialize(), 
 
 						}, 
-            function(data) {
-              
-              $("#chat_converse").load(location.href + " #chat_converse");
-            
-
-
-				});	
+            );	
               $('#message').val('');					
               $('#message').focus();
 
@@ -200,20 +195,18 @@ $(document).ready(function(){
 
 		});
 
-
-    
-    
 </script>
 
 <script>
 $(document).ready(function () {
-  setInterval(function() {
+  
+  setInterval(() => {     
     var $message = $("#chat_converse");
-        $message[0].scrollTop = $message[0].scrollHeight;
-        $("#chat_converse").load(location.href + " #chat_converse");
-}, 1500);
-
-});
+    $message[0].scrollTop = $message[0].scrollHeight;
+    $('#chat_converse').load(document.URL + ' #chat_converse*') 
+  }, 3000);
+   
+  });
 </script>
 
 
