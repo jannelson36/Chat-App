@@ -184,7 +184,9 @@ $(document).ready(function(){
 							type : "post",
               dataType: "JSON",
               data: $('#myform').serialize(), 
-
+              success: function(data) {
+                   
+                   $("#chat_converse").load(location.href + " #chat_converse");}
 						}, 
             );	
               $('#message').val('');					
@@ -198,18 +200,15 @@ $(document).ready(function(){
 </script>
 
 <script>
-$(document).ready(function () {
-  
-  setInterval(() => {     
-    var $message = $("#chat_converse");
-    $message[0].scrollTop = $message[0].scrollHeight;
+    $('document').ready(function(){
+      $("form#myform").submit(function(){
     $('#chat_converse').load(document.URL + ' #chat_converse*') 
-  }, 3000);
-   
-  });
+});});
+
 </script>
+<script>
 
-
+</script>
 </body>
 
 </html>
