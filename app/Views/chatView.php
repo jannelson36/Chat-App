@@ -184,9 +184,6 @@ $(document).ready(function(){
 							type : "post",
               dataType: "JSON",
               data: $('#myform').serialize(), 
-              success: function(data) {
-                   
-                   $("#chat_converse").load(location.href + " #chat_converse");}
 						}, 
             );	
               $('#message').val('');					
